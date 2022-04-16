@@ -272,6 +272,7 @@ def respond():
             return df
 
         def congruent_pairing(pairing_type, max_food_nonaroma_val, wine_nonaroma_val):
+            if wine_nonaroma_val is None: return ''
             if pairing_type == 'congruent':
                 return 'congruent'
             elif wine_nonaroma_val >= max_food_nonaroma_val:
@@ -375,7 +376,6 @@ def respond():
             values += values[:1]
             ax.plot(angles, values, color=color, linewidth=2, linestyle='solid')
             ax.fill(angles, values, color=color, alpha=0.4)
-
             # Add a title
             # Insert a line break in the title if needed
             title_split = str(title).split(',')
@@ -451,10 +451,111 @@ def respond():
                 descriptor_nr += 1
 
         """It's showtime. Time to generate our wine recommendations."""
-        
+        input = meal
+        if "smörgåsbord" in input.lower() and "smorgosbord" in input.lower():
+          test_food = ['bread', 'mayonnaise', 'butter', 'pepper', 'lemon', 'salmon', 'mustard', 'potato', 'dill', 'chicory', 'beetroot']
+        elif "skagenröra" in input.lower() and "skagenrora" in input.lower():
+          test_food = ['shrimp', 'mayonnaise', 'dill', 'pepper', 'lemon', 'bread', 'salt']
+        elif "shepherd" in input.lower() and "pie" in input.lower():
+          test_food = ['ground_beef', 'onion', 'parsley', 'pepper', 'garlic', 'broth', 'tomato', 'carrot']
+        elif "greek" in input.lower() and "chicken" in input.lower() and "stew" in input.lower():
+          test_food = ['chicken', 'rice', 'olives', 'onion', 'feta', 'broth']
+        elif "tenderloin" in input.lower() and "pasta" in input.lower():
+          test_food = ['tenderloin', 'pasta', 'olive', 'flour', 'onion']
+        elif "pytt" in input.lower() and "panna" in input.lower():
+          test_food = ['potato', 'meat', 'butter', 'pepper', 'onion', 'egg']
+        elif "macaroni" in input.lower() and "pudding" in input.lower():
+          test_food = ['bacon', 'macaroni', 'cheese', 'egg', 'salt', 'pepper']
+        elif "pork" in input.lower() and "stew" in input.lower():
+          test_food = ['pork', 'broth', 'onion', 'rosemary', 'potato', 'mushroom', 'oregano']
+        elif "tomato" in input.lower() and "soup" in input.lower():
+          test_food = ['tomato', 'onion', 'broth', 'basil']
+        elif "halloumi" in input.lower() and "burger" in input.lower():
+          test_food = ['cheese', 'salad', 'mayonnaise', 'onion', 'cucumber', 'bread', 'garlic']
+        elif "noodle" in input.lower() and "wok" in input.lower():
+          test_food = ['chicken', 'egg', 'soy_sauce', 'ginger', 'lime', 'noodles', 'vinegar']
+        elif "pancakes" in input.lower():
+          test_food = ['pancakes']
+        elif "tikka masala" in input.lower():
+          test_food = ['chicken', 'garlic', 'ginger', 'carrot', 'tomato', 'cream', 'onion']
+        elif "swedish" in input.lower() and "meatball" in input.lower():
+          test_food = ['ground_beef', 'lingon', 'potato', 'onion', 'egg', 'pepper', 'gravy', 'parsley', 'flour', 'panko']
+        elif "meatballs" in input.lower():
+          test_food = ['ground_beef', 'onion', 'egg', 'pepper', 'flour', 'panko']
+        elif "pasta" in input.lower() and "pesto" in input.lower():
+          test_food = ['pesto', 'pasta']
+        elif "tamal" in input.lower():
+          test_food = ['salt', 'cumin', 'beef', 'corn', 'bean', 'cheese']
+        elif "wagashi" in input.lower():
+          test_food = ['sugar', 'lima']
+        elif "mac" in input.lower() and "cheese" in input.lower():
+          test_food = ['macaroni', 'cheddar', 'butter']
+        elif "sushi" in input.lower():
+          test_food = ['sushi', 'soy_sauce', 'rice']
+        elif "biryani" in input.lower():
+          test_food = ['biryani', 'chicken', 'saffron']
+        elif "dumplings" in input.lower():
+          test_food = ['soy_sauce', 'onion', 'garlic', 'egg', 'pork']
+        elif "fried" in input.lower() and "chicken" in input.lower():
+          test_food = ['fried', 'chicken']
+        elif "cheeseburger" in input.lower():
+          test_food = ['hamburger', 'bun', 'cheese', 'ketchup', 'onion']
+        elif "burger" in input.lower():
+          test_food = ['hamburger', 'bun', 'ketchup', 'cucumber', 'onion']
+        elif "pie" in input.lower():
+          test_food = ['pie']
+        elif "kimchi" in input.lower():
+          test_food = ['kimchi']
+        elif "risotto" in input.lower():
+          test_food = ['risotto']
+        elif "pesto" in input.lower():
+          test_food = ['pesto']
+        elif "cupcake" in input.lower():
+          test_food = ['cake', 'icing', 'sugar', 'egg', 'flour', 'vanilla']
+        elif "noodle" in input.lower() and "soup" in input.lower():
+          test_food = ['noodles', 'soy_sauce', 'onion', 'oyster']
+        elif "ramen" in input.lower():
+          test_food = ['ramen', 'soy_sauce', 'vinegar', 'garlic', 'chili']
+        elif "soba" in input.lower():
+          test_food = ['soba']
+        elif "roast chicken" in input.lower():
+          test_food = ['roast_chicken']
+        elif "roast" in input.lower() and "chicken" in input.lower():
+          test_food = ['roast_chicken', 'pepper', 'carrot']
+        elif "bolognese" in input.lower():
+          test_food = ['spaghetti', 'onion', 'meat', 'carrot', 'tomato', 'basil']
+        elif "margherita" in input.lower():
+          etest_food = ['tomato', 'cheese', 'oregano', 'mozzarella', 'basil']
+        elif "pommes" in input.lower() and "frites" in input.lower():
+          test_food = ['fries']
+        elif "vesuvio" in input.lower():
+          test_food = ['tomato', 'cheese', 'ham', 'oregano', 'mozzarella']
+        elif "duck" in input.lower():
+          test_food = ['duck', 'garlic', 'gravy']
+        elif "fried rice" in input.lower():
+          test_food = ['butter', 'rice', 'egg', 'soy_sauce', 'vegetables']
+        elif "baba" in input.lower() and "ganoush" in input.lower():
+          test_food = ['oil', 'garlic', 'chili', 'parsley', 'salt', 'pepper', 'cumin']
+        elif "mutabal" in input.lower() or "moutabal" in input.lower():
+          test_food = ['eggplant', 'flesh', 'garlic', 'tahini']
+        elif "garlic" in input.lower() and "soup" in input.lower():
+          test_food = ['garlic', 'chicken', 'salt', 'pepper', 'parmesan']
+        elif "couscous" in input.lower():
+          test_food = ['couscous', 'garlic', 'chicken', 'parsley']
+        elif "schnitzel" in input.lower():
+          test_food = ['schnitzel']
+        elif "moussaka" in input.lower():
+          test_food = ['eggplant', 'lamb', 'milk', 'butter', 'flour', 'salt', 'pepper']
+        elif "pizza" in input.lower():
+          test_food = ['tomato', 'cheese', 'ham']
+        else:
+            if input[-1] == 's':
+                print("removing s")
+                input = input[:-1]
+            test_food = list(input.split(","))
+            print("Attempting to pair meal: ", test_food)
+
         #test_food = ['peach', 'pie']
-        test_food = list(meal.split(","))
-        print("Attempting to pair meal: ", test_food)
         
         food_nonaromas, food_weight, aroma_embedding = return_all_food_values(test_food)
 
@@ -494,16 +595,14 @@ def respond():
         print(pairing_types)
 
         plt.figure(figsize=(4, 5), dpi=75)
+        #gs = gridspec.GridSpec(2, 1, height_ratios=[3, 0.5]) 
 
-        gs = gridspec.GridSpec(2, 1, height_ratios=[3, 0.5]) 
+        #food_nonaromas_norm = {k: v[0] for k, v in food_nonaromas.items()}
 
-        food_nonaromas_norm = {k: v[0] for k, v in food_nonaromas.items()}
-
-        food_names = ' + '.join(test_food)
-        make_spider(gs, 0, food_nonaromas_norm, 'Food Flavor Profile:', 'orange', food_names)
-        plot_number_line(gs, 1, food_weight[0], dot_color='orange')
-
-        print(food_nonaromas_norm)
+        #food_names = ' + '.join(test_food)
+        #make_spider(gs, 0, food_nonaromas_norm, 'Food Flavor Profile:', 'orange', food_names)
+        #plot_number_line(gs, 1, food_weight[0], dot_color='orange')
+        #print(food_nonaromas_norm)
 
         response["MESSAGE"] = wine_names
         #response["MESSAGE"] = f"Welcome {name} to our awesome API!"
