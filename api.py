@@ -546,7 +546,7 @@ def respond():
             if input[-1] == 's':
                 print("removing s")
                 input = input[:-1]
-            test_food = list(input.split(","))
+            test_food = list(input.lower().split(","))
             print("Attempting to pair meal: ", test_food)
 
         #test_food = ['peach', 'pie']
