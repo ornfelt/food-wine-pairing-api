@@ -521,7 +521,7 @@ def respond():
         elif "bolognese" in input.lower():
           test_food = ['spaghetti', 'onion', 'meat', 'carrot', 'tomato', 'basil']
         elif "margherita" in input.lower():
-          etest_food = ['tomato', 'cheese', 'oregano', 'mozzarella', 'basil']
+          test_food = ['tomato', 'cheese', 'oregano', 'mozzarella', 'basil']
         elif "pommes" in input.lower() and "frites" in input.lower():
           test_food = ['fries']
         elif "vesuvio" in input.lower():
