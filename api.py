@@ -470,8 +470,10 @@ def respond():
           test_food = ['pork', 'broth', 'onion', 'rosemary', 'potato', 'mushroom', 'oregano']
         elif "tomato" in input.lower() and "soup" in input.lower():
           test_food = ['tomato', 'onion', 'broth', 'basil']
+        elif "chicken" in input.lower() and "soup" in input.lower():
+          test_food = ['chicken', 'herbs', 'garlic', 'ginger', 'curcumin', 'vegetables']
         elif "halloumi" in input.lower() and "burger" in input.lower():
-          test_food = ['cheese', 'salad', 'mayonnaise', 'onion', 'cucumber', 'bread', 'garlic']
+          test_food = ['avocado', 'cheese', 'salad', 'mayonnaise', 'onion', 'cucumber', 'bread', 'garlic']
         elif "noodle" in input.lower() and "wok" in input.lower():
           test_food = ['chicken', 'egg', 'soy_sauce', 'ginger', 'lime', 'noodles', 'vinegar']
         elif "pancakes" in input.lower():
