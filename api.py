@@ -452,9 +452,9 @@ def respond():
 
         """It's showtime. Time to generate our wine recommendations."""
         input = meal
-        if "smörgåsbord" in input.lower() and "smorgosbord" in input.lower():
+        if "smörgåsbord" in input.lower() or "smorgosbord" in input.lower():
           test_food = ['bread', 'mayonnaise', 'butter', 'pepper', 'lemon', 'salmon', 'mustard', 'potato', 'dill', 'chicory', 'beetroot']
-        elif "skagenröra" in input.lower() and "skagenrora" in input.lower():
+        elif "skagenröra" in input.lower() or "skagenrora" in input.lower():
           test_food = ['shrimp', 'mayonnaise', 'dill', 'pepper', 'lemon', 'bread', 'salt']
         elif "shepherd" in input.lower() and "pie" in input.lower():
           test_food = ['ground_beef', 'onion', 'parsley', 'pepper', 'garlic', 'broth', 'tomato', 'carrot']
