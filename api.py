@@ -346,7 +346,7 @@ def respond():
 
         def retrieve_pairing_type_info(wine_recommendations, full_nonaroma_table, pairing_type):
             if is_wine_specific > 0:
-                pairings = wine_recommendations.loc[wine_recommendations['pairing_type'] == pairing_type].head(20)
+                pairings = wine_recommendations.loc[wine_recommendations['pairing_type'] == pairing_type].head(200)
             else:
                 pairings = wine_recommendations.loc[wine_recommendations['pairing_type'] == pairing_type].head(4)
             wine_names = list(pairings.index)
