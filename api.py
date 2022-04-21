@@ -40,7 +40,7 @@ app = Flask(__name__)
 
 @app.route('/getpairing/', methods=['GET'])
 def respond():
-    # Retrieve the meal from the url parameter /getmsg/?meal=
+    # Retrieve the meal from the url parameter /getpairing/?meal=
     meal = request.args.get("meal", None)
 
     # For debugging
@@ -55,6 +55,18 @@ def respond():
     elif str(meal).isdigit():
         response["ERROR"] = "The meal can't be numeric. Please send a string."
     else:
+    
+        # Boolean that determines wine types: 0 means all types, 1 is red only, and 2 is white only
+        is_wine_specific = 0
+        
+        if meal[-1] == '1':
+            print("Wine type: 1")
+            meal = meal[:-1]
+            is_wine_specific = 1
+        elif meal[-1] == '2':
+            print("Wine type: 2")
+            meal = meal[:-1]
+            is_wine_specific = 2
     
         #------------------------------------------------------------
         
@@ -333,7 +345,10 @@ def respond():
         """The following function puts all the steps in our recommendation generation process together."""
 
         def retrieve_pairing_type_info(wine_recommendations, full_nonaroma_table, pairing_type):
-            pairings = wine_recommendations.loc[wine_recommendations['pairing_type'] == pairing_type].head(4)
+            if is_wine_specific > 0:
+                pairings = wine_recommendations.loc[wine_recommendations['pairing_type'] == pairing_type].head(20)
+            else:
+                pairings = wine_recommendations.loc[wine_recommendations['pairing_type'] == pairing_type].head(4)
             wine_names = list(pairings.index)
             recommendation_nonaromas = full_nonaroma_table.loc[wine_names, :]
             pairing_nonaromas = recommendation_nonaromas[['sweet', 'acid', 'salt', 'piquant', 'fat', 'bitter']].to_dict('records')
@@ -599,9 +614,38 @@ def respond():
         #make_spider(gs, 0, food_nonaromas_norm, 'Food Flavor Profile:', 'orange', food_names)
         #plot_number_line(gs, 1, food_weight[0], dot_color='orange')
         #print(food_nonaromas_norm)
-
-        response["MESSAGE"] = wine_names
-        #response["MESSAGE"] = f"Welcome {name} to our awesome API!"
+        
+        
+        if is_wine_specific == 0:
+            response["MESSAGE"] = wine_names
+        elif is_wine_specific == 1:
+            red_wine_list = []
+            red_wines = ['aglianico', 'alicante bouschet', 'barbera', 'blaufrankish', 'cabernet franc', 'cabernet sauvignon', 'carignan', 'carménère', 'carmenere', 'chambourcin', 'cinsault', 'corvina', 'gamay', 'graciano', 'grenache', 'lambrusco', 'malbec', 'merlot', 'montepulciano', 'mourvèdre', 'mourvedre', 'nebbiolo', 'nero d’avola', 'nero davola', 'norton', 'pinot meunier', 'petit sirah', 'petit verdot', 'pinot noir', 'pinotage', 'primitivo', 'red blends', 'sangiovese', 'st. laurent', 'saint laurent', 'syrah', 'shiraz', 'teroldego', 'tannat', 'tempranillo', 'touriga nacional', 'trousseau', 'zinfandel']
+            for i in range(len(wine_names)):
+                for red_wine_type in red_wines:
+                if red_wine_type in wine_names[i].lower():
+                    red_wine_list.append(wine_names[i])
+                    break
+                if len(red_wine_list) == 4:
+                    break
+            print("red_wine_list:")
+            print(red_wine_list)
+            response["MESSAGE"] = red_wine_list
+        elif is_wine_specific == 2:
+            white_wine_list = []
+            white_wines = ['albariño', 'albarino', 'antão vaz', 'antao vaz', 'arinto', 'assyrtiko', 'bacchus', 'chardonnay', 'chenin blanc', 'garganega', 'gewürztraminer', 'gewurztraminer', 'glera', 'grenache blanc', 'grüner veltliner', 'gruner veltliner', 'malvasia', 'marsanne', 'melon de bourgogne', 'muscadelle', 'muscadine', 'muscat', 'muscat blanc', 'pedro ximénez', 'pedro ximenez', 'petit manseng', 'pinot grigio', 'prosecco', 'rkatsiteli', 'roussanne', 'riesling', 'sauvignon blanc', 'semillon', 'seyval blanc', 'torrontés', 'torrontes', 'traminette', 'verdejo', 'vermentino', 'vidal blanc', 'viognier', 'white blends']
+            for i in range(len(wine_names)):
+                for white_wine_type in white_wines:
+                if white_wine_type in wine_names[i].lower():
+                    white_wine_list.append(wine_names[i])
+                    break
+                if len(white_wine_list) == 4:
+                    break
+            print("white_wine_list:")
+            print(white_wine_list)
+            response["MESSAGE"] = white_wine_list
+        
+        #response["MESSAGE"] = wine_names
 
     # Return the response in json format
     return jsonify(response)
