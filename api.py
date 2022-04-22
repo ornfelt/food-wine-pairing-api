@@ -346,7 +346,7 @@ def respond():
 
         def retrieve_pairing_type_info(wine_recommendations, full_nonaroma_table, pairing_type):
             if is_wine_specific > 0:
-                pairings = wine_recommendations.loc[wine_recommendations['pairing_type'] == pairing_type].head(200)
+                pairings = wine_recommendations.loc[wine_recommendations['pairing_type'] == pairing_type].head(100)
             else:
                 pairings = wine_recommendations.loc[wine_recommendations['pairing_type'] == pairing_type].head(4)
             wine_names = list(pairings.index)
@@ -584,12 +584,16 @@ def respond():
         # if possible, provide 2 contrasting and 2 congruent options. If not possible, just return 4 options of one type.
         if len(contrasting_wines) >= 2 and len(congruent_wines) >= 2:
             wine_names = contrasting_wines[:2] + congruent_wines[:2]
+            if is_wine_specific > 0:
+                wine_names = contrasting_wines + congruent_wines
             wine_nonaromas = contrasting_nonaromas[:2] + congruent_nonaromas[:2]
             wine_body = contrasting_body[:2] + congruent_body[:2]
             impactful_descriptors = impactful_descriptors_contrasting[:2] + impactful_descriptors_congruent[:2]
             pairing_types = ['Contrasting', 'Contrasting', 'Congruent', 'Congruent']
         elif len(contrasting_wines) >= 2:
             wine_names = contrasting_wines
+            if is_wine_specific > 0:
+                wine_names = wine_names + congruent_wines
             wine_nonaromas = contrasting_nonaromas
             wine_body = contrasting_body
             impactful_descriptors = impactful_descriptors_contrasting
