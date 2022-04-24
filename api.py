@@ -56,6 +56,30 @@ def respond():
         response["ERROR"] = "The meal can't be numeric. Please send a string."
     else:
     
+        # Firstly look if meal is cached/saved already - then we can return the correct response faster
+        all_meals = ["smörgåsbord", "skagenröra", "shepherds pie", "greek chicken stew", "tenderloin pasta", "pyttipanna", "macaroni pudding", "pork stew", "tomato soup", "chicken soup", "halloumi burger", "noodle wok ", "pancakes", "waffles", "tikka masala", "swedish meatballs", "meatballs", "pasta pesto", "tamal", "wagashi", "mac and cheese", "sushi", "biryani", "dumplings", "fried chicken", "cheeseburger", "burger", "cupcake", "noodle soup", "ramen", "soba noodles", "roast chicken", "bolognese", "carbonara", "margherita", "pommes frites", "vesuvio", "duck", "fried rice", "baba ganoush", "mutabal", "garlic soup", "couscous", "moussaka", "peperoni pizza", "chicago-style hotdog"]
+        input = meal
+        for saved_meal in all_meals:
+          if saved_meal in meal:
+            saved_wines = []
+            # open file and read the content to a list
+
+            filename = "saved_meals/" + input + ".txt"
+            if '1' in input:
+              filename = "saved_meals/red_wines/" + input + ".txt"
+            if '2' in input:
+              filename = "saved_meals/white_wines/" + input + ".txt"
+            with open(filename, 'r') as filehandle:
+                for line in filehandle:
+                    # remove linebreak which is the last character of the string
+                    current_line = line[:-1]
+                    # add item to the list
+                    saved_wines.append(current_line)
+            print(saved_wines)
+            response["MESSAGE"] = saved_wines
+            return jsonify(response)
+            break
+    
         # Boolean that determines wine types: 0 means all types, 1 is red only, and 2 is white only
         is_wine_specific = 0
         
@@ -529,8 +553,6 @@ def respond():
           test_food = ['ramen', 'soy_sauce', 'vinegar', 'garlic', 'chili']
         elif "soba" in input.lower():
           test_food = ['soba']
-        elif "roast chicken" in input.lower():
-          test_food = ['roast_chicken']
         elif "roast" in input.lower() and "chicken" in input.lower():
           test_food = ['roast_chicken', 'pepper', 'carrot']
         elif "bolognese" in input.lower():
