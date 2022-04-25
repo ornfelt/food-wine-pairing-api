@@ -57,7 +57,7 @@ def respond():
     else:
     
         # Firstly look if meal is cached/saved already - then we can return the correct response faster
-        all_meals = ["smörgåsbord", "skagenröra", "shepherds pie", "greek chicken stew", "tenderloin pasta", "pyttipanna", "macaroni pudding", "pork stew", "tomato soup", "chicken soup", "halloumi burger", "noodle wok ", "pancakes", "waffles", "tikka masala", "swedish meatballs", "meatballs", "pasta pesto", "tamal", "wagashi", "mac and cheese", "sushi", "biryani", "dumplings", "fried chicken", "cheeseburger", "burger", "cupcake", "noodle soup", "ramen", "soba noodles", "roast chicken", "bolognese", "carbonara", "margherita", "pommes frites", "vesuvio", "duck", "fried rice", "baba ganoush", "mutabal", "garlic soup", "couscous", "moussaka", "peperoni pizza", "chicago-style hotdog"]
+        all_meals = ["smörgåsbord", "skagenröra", "shepherds pie", "greek chicken stew", "tenderloin pasta", "pyttipanna", "macaroni pudding", "pork stew", "tomato soup", "chicken soup", "halloumi burger", "noodle wok ", "pancakes", "waffles", "tikka masala", "swedish meatballs", "meatballs", "pasta pesto", "tamal", "wagashi", "mac and cheese", "sushi", "biryani", "dumplings", "fried chicken", "cheeseburger", "burger", "cupcake", "noodle soup", "ramen", "soba noodles", "roast chicken", "bolognese", "carbonara", "margherita", "pommes frites", "vesuvio", "duck", "fried rice", "baba ganoush", "mutabal", "garlic soup", "couscous", "moussaka", "peperoni pizza", "chicago-style hotdog", "hawaii"]
         input = meal
         for saved_meal in all_meals:
           if saved_meal in meal:
@@ -579,8 +579,12 @@ def respond():
           test_food = ['eggplant', 'lamb', 'milk', 'butter', 'flour', 'salt', 'pepper']
         elif "peperoni" in input.lower() and "pizza" in input.lower():
           test_food = ['tomato', 'cheese', 'peperoni']
+        elif "hawaii" in input.lower():
+          test_food = ['flour', 'oliveoil', 'tomato', 'cheese', 'ham', 'pineapple', 'salt']
         elif "pizza" in input.lower():
-          test_food = ['tomato', 'cheese', 'ham']
+          test_food = ['flour', 'oliveoil', 'tomato', 'cheese', 'ham']
+        elif "chicago-style hotdog" in input.lower():
+          test_food = ['hotdog', 'mustard', 'tomato', 'onion', 'pepperoncini', 'gherkin', 'celery', 'relish']
         else:
             if input[-1] == 's':
                 print("removing s")
@@ -646,7 +650,7 @@ def respond():
             response["MESSAGE"] = wine_names
         elif is_wine_specific == 1:
             red_wine_list = []
-            red_wines = ['aglianico', 'alicante bouschet', 'barbera', 'blaufrankish', 'cabernet franc', 'cabernet sauvignon', 'carignan', 'carménère', 'carmenere', 'chambourcin', 'cinsault', 'corvina', 'gamay', 'graciano', 'grenache', 'lambrusco', 'malbec', 'merlot', 'montepulciano', 'mourvèdre', 'mourvedre', 'nebbiolo', 'nero d’avola', 'nero davola', 'norton', 'pinot meunier', 'petit sirah', 'petit verdot', 'pinot noir', 'pinotage', 'primitivo', 'red blends', 'sangiovese', 'st. laurent', 'saint laurent', 'syrah', 'shiraz', 'teroldego', 'tannat', 'tempranillo', 'touriga nacional', 'trousseau', 'zinfandel']
+            red_wines = ['aglianico', 'alicante bouschet', 'barbera', 'blaufrankish', 'cabernet franc', 'cabernet sauvignon', 'carignan', 'carménère', 'carmenere', 'chambourcin', 'cinsault', 'corvina', 'gamay', 'graciano', 'grenache', 'lambrusco', 'malbec', 'merlot', 'montepulciano', 'mourvèdre', 'mourvedre', 'nebbiolo', 'nero d’avola', 'nero davola', 'norton', 'pinot meunier', 'petit sirah', 'petit verdot', 'pinot noir', 'pinotage', 'primitivo', 'red blend' 'red blends', 'sangiovese', 'st. laurent', 'saint laurent', 'syrah', 'shiraz', 'teroldego', 'tannat', 'tempranillo', 'touriga nacional', 'trousseau', 'zinfandel']
             for i in range(len(wine_names)):
                 for red_wine_type in red_wines:
                     if red_wine_type in wine_names[i].lower():
@@ -659,7 +663,7 @@ def respond():
             response["MESSAGE"] = red_wine_list
         elif is_wine_specific == 2:
             white_wine_list = []
-            white_wines = ['albariño', 'albarino', 'antão vaz', 'antao vaz', 'arinto', 'assyrtiko', 'bacchus', 'chardonnay', 'chenin blanc', 'garganega', 'gewürztraminer', 'gewurztraminer', 'glera', 'grenache blanc', 'grüner veltliner', 'gruner veltliner', 'malvasia', 'marsanne', 'melon de bourgogne', 'muscadelle', 'muscadine', 'muscat', 'muscat blanc', 'pedro ximénez', 'pedro ximenez', 'petit manseng', 'pinot grigio', 'prosecco', 'rkatsiteli', 'roussanne', 'riesling', 'sauvignon blanc', 'semillon', 'seyval blanc', 'torrontés', 'torrontes', 'traminette', 'verdejo', 'vermentino', 'vidal blanc', 'viognier', 'white blends']
+            white_wines = ['albariño', 'albarino', 'antão vaz', 'antao vaz', 'arinto', 'assyrtiko', 'bacchus', 'chardonnay', 'chenin blanc', 'garganega', 'gewürztraminer', 'gewurztraminer', 'glera', 'grenache blanc', 'grüner veltliner', 'gruner veltliner', 'malvasia', 'marsanne', 'melon de bourgogne', 'muscadelle', 'muscadine', 'muscat', 'muscat blanc', 'pedro ximénez', 'pedro ximenez', 'petit manseng', 'pinot grigio', 'prosecco', 'rkatsiteli', 'roussanne', 'riesling', 'sauvignon blanc', 'semillon', 'seyval blanc', 'torrontés', 'torrontes', 'traminette', 'verdejo', 'vermentino', 'vidal blanc', 'viognier', 'white blends', 'white blend', 'durella', 'assyrtiko']
             for i in range(len(wine_names)):
                 for white_wine_type in white_wines:
                     if white_wine_type in wine_names[i].lower():
