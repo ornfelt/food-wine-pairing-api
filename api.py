@@ -33,11 +33,6 @@ pd.options.mode.chained_assignment = None
 
 app = Flask(__name__)
 
-
-
-#---------------------------------------------------
-
-
 @app.route('/getpairing/', methods=['GET'])
 def respond():
     # Retrieve the meal from the url parameter /getpairing/?meal=
@@ -92,9 +87,6 @@ def respond():
             meal = meal[:-1]
             is_wine_specific = 2
     
-        #------------------------------------------------------------
-        
-        #-------------------------------------------------
         """### Loading the Relevant Data Files
 
         First up, the dataset with all our wine varieties and their average aroma & nonaroma embeddings.
