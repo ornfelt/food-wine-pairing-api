@@ -1,3 +1,4 @@
+Cython==0.29.36
 Flask==2.1.1
 gensim==4.1.2
 matplotlib==3.5.1
@@ -5,5 +6,5 @@ nltk==3.7
 numpy==1.22.3
 pandas==1.4.2
 pandas_stubs==1.2.0.35
-scikit_learn==1.0.2
+scikit_learn==1.0.2 --no-build-isolation
 scipy==1.8.0
